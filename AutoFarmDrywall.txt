@@ -1,0 +1,85 @@
+local destroyablesFolder = game.Workspace:FindFirstChild("Destroyables")
+local urbanHouse = game.Workspace:FindFirstChild("Urban House")
+local yard = game.Workspace:FindFirstChild("Yard")
+local frontDoorway = game.Workspace:FindFirstChild("FrontDoorway")
+local neonSign = game.Workspace:FindFirstChild("NeonSign")
+
+if destroyablesFolder then
+    destroyablesFolder:Destroy()
+end
+
+if urbanHouse then
+    urbanHouse:Destroy()
+end
+
+if yard then
+    yard:Destroy()
+end
+
+if frontDoorway then
+    frontDoorway:Destroy()
+end
+
+if neonSign then
+    neonSign:Destroy()
+end
+
+while true do
+    local player = game:GetService("Players").LocalPlayer
+    local drywall = game:GetService("Workspace").Drywall:GetChildren()[math.random(0, 12100)]
+
+    if player and drywall then
+        player.Character.HumanoidRootPart.CFrame = drywall.CFrame
+    end
+
+    local pamphlet = player.Backpack:FindFirstChild("Pamphlet")
+
+    if player and pamphlet then
+        if os.time() % 25 == 0 then
+            player.Character.Humanoid:EquipTool(pamphlet)
+            wait(0.05)
+            player.Character.Humanoid:UnequipTools()
+        end
+    end
+
+      local c4 = player.Backpack:FindFirstChild("C4")
+
+    if player and c4 then
+        if os.time() % 40 == 0 then
+            player.Character.Humanoid:EquipTool(c4)
+            wait(0.05)
+            player.Character.Humanoid:UnequipTools()
+        end
+    end
+
+    if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Q) then
+        break
+    end
+
+    wait(0.1)
+end
+
+local Noclip = nil
+local Clip = nil
+
+function noclip()
+	Clip = false
+	local function Nocl()
+		if Clip == false and game.Players.LocalPlayer.Character ~= nil then
+			for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+				if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
+					v.CanCollide = false
+				end
+			end
+		end
+		wait(0.21) -- basic optimization
+	end
+	Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
+end
+
+function clip()
+	if Noclip then Noclip:Disconnect() end
+	Clip = true
+end
+
+noclip() -- to toggle noclip() and clip()
