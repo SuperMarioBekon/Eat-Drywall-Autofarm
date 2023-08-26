@@ -1,85 +1,112 @@
-local destroyablesFolder = game.Workspace:FindFirstChild("Destroyables")
-local urbanHouse = game.Workspace:FindFirstChild("Urban House")
-local yard = game.Workspace:FindFirstChild("Yard")
-local frontDoorway = game.Workspace:FindFirstChild("FrontDoorway")
-local neonSign = game.Workspace:FindFirstChild("NeonSign")
+local EatDrywallHack = Instance.new("ScreenGui")
+local TextButton = Instance.new("TextButton")
 
-if destroyablesFolder then
-    destroyablesFolder:Destroy()
-end
 
-if urbanHouse then
-    urbanHouse:Destroy()
-end
+EatDrywallHack.Name = "Eat Drywall Hack"
+EatDrywallHack.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+EatDrywallHack.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-if yard then
-    yard:Destroy()
-end
+TextButton.Parent = EatDrywallHack
+TextButton.BackgroundColor3 = Color3.fromRGB(126, 97, 72)
+TextButton.BorderColor3 = Color3.fromRGB(88, 75, 52)
+TextButton.BorderSizePixel = 6
+TextButton.Position = UDim2.new(0.125094771, 0, 0.169209436, 0)
+TextButton.Size = UDim2.new(0, 200, 0, 50)
+TextButton.ZIndex = 0
+TextButton.Font = Enum.Font.SourceSansBold
+TextButton.Text = "Auto Farm"
+TextButton.TextColor3 = Color3.fromRGB(203, 82, 42)
+TextButton.TextSize = 38.000
 
-if frontDoorway then
-    frontDoorway:Destroy()
-end
+-- Scripts:
 
-if neonSign then
-    neonSign:Destroy()
-end
+local function PFUO_fake_script()
+	local script = Instance.new('LocalScript', TextButton)
 
-while true do
-    local player = game:GetService("Players").LocalPlayer
-    local drywall = game:GetService("Workspace").Drywall:GetChildren()[math.random(0, 12100)]
-
-    if player and drywall then
-        player.Character.HumanoidRootPart.CFrame = drywall.CFrame
-    end
-
-    local pamphlet = player.Backpack:FindFirstChild("Pamphlet")
-
-    if player and pamphlet then
-        if os.time() % 25 == 0 then
-            player.Character.Humanoid:EquipTool(pamphlet)
-            wait(0.05)
-            player.Character.Humanoid:UnequipTools()
-        end
-    end
-
-      local c4 = player.Backpack:FindFirstChild("C4")
-
-    if player and c4 then
-        if os.time() % 40 == 0 then
-            player.Character.Humanoid:EquipTool(c4)
-            wait(0.05)
-            player.Character.Humanoid:UnequipTools()
-        end
-    end
-
-    if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.Q) then
-        break
-    end
-
-    wait(0.1)
-end
-
-local Noclip = nil
-local Clip = nil
-
-function noclip()
-	Clip = false
-	local function Nocl()
-		if Clip == false and game.Players.LocalPlayer.Character ~= nil then
-			for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-				if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
-					v.CanCollide = false
+	local UIS = game:GetService('UserInputService')
+	local frame = script.Parent
+	
+	local dragToggle = nil
+	local dragSpeed = 0.01
+	local dragStart = nil
+	local startPos = nil
+	
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+			startPos.Y.Scale, startPos.Y.Offset + delta.Y) 
+		game:GetService('TweenService') :Create(frame, TweenInfo.new(dragSpeed), {Position = position}) :Play()
+	end
+	
+	frame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
+			dragToggle = true
+			dragStart = input.Position
+			startPos = frame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
 				end
+			end)
+		end
+	end)
+	
+	UIS.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			if dragToggle then
+				updateInput(input)
 			end
 		end
-		wait(0.21) -- basic optimization
+	end)
+	
+end
+coroutine.wrap(PFUO_fake_script)()
+local function SFCPTCF_fake_script()
+	local script = Instance.new('LocalScript', TextButton)
+
+	local button = script.Parent
+	local isActive = false
+	
+	local function toggleScript()
+		isActive = not isActive
+	
+		if isActive then
+			button.TextColor3 = Color3.fromRGB(103, 203, 75)
+		else
+			button.TextColor3 = Color3.fromRGB(203, 82, 42)
+		end
 	end
-	Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
+	
+	button.MouseButton1Click:Connect(toggleScript)
 end
+coroutine.wrap(SFCPTCF_fake_script)()
+local function PXFCMW_fake_script()
+	local script = Instance.new('LocalScript', TextButton)
 
-function clip()
-	if Noclip then Noclip:Disconnect() end
-	Clip = true
+	local button = script.Parent
+	local isActive = false
+	local player = game:GetService("Players").LocalPlayer
+	
+	local function toggleScript()
+		isActive = not isActive
+	
+		if isActive then
+			while isActive do
+				local drywall = game:GetService("Workspace").House1.Drywall:FindFirstChild("Drywall")
+				local args = {
+					[1] = drywall.Position,
+					[2] = player.Character.HumanoidRootPart.Position
+				}
+	
+				player.Character.HumanoidRootPart.CFrame = CFrame.new(drywall.Position)
+				game:GetService("ReplicatedStorage"):WaitForChild("DrywallClicked"):FireServer(unpack(args))
+				wait(0.0001)
+			end
+		else
+			player.Character.HumanoidRootPart.CFrame = CFrame.new(player.Character.HumanoidRootPart.Position)
+		end
+	end
+	
+	button.MouseButton1Click:Connect(toggleScript)
 end
-
-noclip() -- to toggle noclip() and clip()
+coroutine.wrap(PXFCMW_fake_script)()
