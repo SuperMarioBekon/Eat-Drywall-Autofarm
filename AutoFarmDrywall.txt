@@ -1,7 +1,6 @@
 local EatDrywallHack = Instance.new("ScreenGui")
 local TextButton = Instance.new("TextButton")
 
-
 EatDrywallHack.Name = "Eat Drywall Hack"
 EatDrywallHack.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 EatDrywallHack.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -10,7 +9,7 @@ TextButton.Parent = EatDrywallHack
 TextButton.BackgroundColor3 = Color3.fromRGB(126, 97, 72)
 TextButton.BorderColor3 = Color3.fromRGB(88, 75, 52)
 TextButton.BorderSizePixel = 6
-TextButton.Position = UDim2.new(0.125094771, 0, 0.169209436, 0)
+TextButton.Position = UDim2.new(0.403335869, 0, 0.431345344, 0)
 TextButton.Size = UDim2.new(0, 200, 0, 50)
 TextButton.ZIndex = 0
 TextButton.Font = Enum.Font.SourceSansBold
@@ -18,9 +17,8 @@ TextButton.Text = "Auto Farm"
 TextButton.TextColor3 = Color3.fromRGB(203, 82, 42)
 TextButton.TextSize = 38.000
 
--- Scripts:
 
-local function PFUO_fake_script()
+local function FEKFUQY_fake_script()
 	local script = Instance.new('LocalScript', TextButton)
 
 	local UIS = game:GetService('UserInputService')
@@ -60,10 +58,11 @@ local function PFUO_fake_script()
 	end)
 	
 end
-coroutine.wrap(PFUO_fake_script)()
-local function SFCPTCF_fake_script()
+coroutine.wrap(FEKFUQY_fake_script)()
+local function OKABNR_fake_script()
 	local script = Instance.new('LocalScript', TextButton)
 
+	
 	local button = script.Parent
 	local isActive = false
 	
@@ -79,8 +78,8 @@ local function SFCPTCF_fake_script()
 	
 	button.MouseButton1Click:Connect(toggleScript)
 end
-coroutine.wrap(SFCPTCF_fake_script)()
-local function PXFCMW_fake_script()
+coroutine.wrap(OKABNR_fake_script)()
+local function STGQXD_fake_script()
 	local script = Instance.new('LocalScript', TextButton)
 
 	local button = script.Parent
@@ -100,7 +99,7 @@ local function PXFCMW_fake_script()
 	
 				player.Character.HumanoidRootPart.CFrame = CFrame.new(drywall.Position)
 				game:GetService("ReplicatedStorage"):WaitForChild("DrywallClicked"):FireServer(unpack(args))
-				wait(0.0001)
+				wait(0.01)
 			end
 		else
 			player.Character.HumanoidRootPart.CFrame = CFrame.new(player.Character.HumanoidRootPart.Position)
@@ -109,4 +108,19 @@ local function PXFCMW_fake_script()
 	
 	button.MouseButton1Click:Connect(toggleScript)
 end
-coroutine.wrap(PXFCMW_fake_script)()
+coroutine.wrap(STGQXD_fake_script)()
+local function ZUGIQCI_fake_script()
+	local script = Instance.new('LocalScript', TextButton)
+
+	local function checkForSeats(parent)
+		for _, child in ipairs(parent:GetChildren()) do
+			if child:IsA("Seat") then
+				child:Destroy()
+			end
+			checkForSeats(child)
+		end
+	end
+	
+	checkForSeats(game:GetService("Workspace"))
+end
+coroutine.wrap(ZUGIQCI_fake_script)()
