@@ -1,6 +1,7 @@
 local EatDrywallHack = Instance.new("ScreenGui")
 local TextButton = Instance.new("TextButton")
 
+
 EatDrywallHack.Name = "Eat Drywall Hack"
 EatDrywallHack.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 EatDrywallHack.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -18,7 +19,7 @@ TextButton.TextColor3 = Color3.fromRGB(203, 82, 42)
 TextButton.TextSize = 38.000
 
 
-local function FEKFUQY_fake_script()
+local function YVMN_fake_script()
 	local script = Instance.new('LocalScript', TextButton)
 
 	local UIS = game:GetService('UserInputService')
@@ -58,8 +59,8 @@ local function FEKFUQY_fake_script()
 	end)
 	
 end
-coroutine.wrap(FEKFUQY_fake_script)()
-local function OKABNR_fake_script()
+coroutine.wrap(YVMN_fake_script)()
+local function XMCJC_fake_script()
 	local script = Instance.new('LocalScript', TextButton)
 
 	
@@ -78,8 +79,8 @@ local function OKABNR_fake_script()
 	
 	button.MouseButton1Click:Connect(toggleScript)
 end
-coroutine.wrap(OKABNR_fake_script)()
-local function STGQXD_fake_script()
+coroutine.wrap(XMCJC_fake_script)()
+local function RTPAG_fake_script()
 	local script = Instance.new('LocalScript', TextButton)
 
 	local button = script.Parent
@@ -91,16 +92,24 @@ local function STGQXD_fake_script()
 	
 		if isActive then
 			while isActive do
-				local drywall = game:GetService("Workspace").House1.Drywall:FindFirstChild("Drywall")
-				local args = {
-					[1] = drywall.Position,
-					[2] = player.Character.HumanoidRootPart.Position
-				}
+				local drywalls = game:GetService("Workspace").House1.Drywall:GetChildren()
+				local randomDrywall = drywalls[math.random(1, #drywalls)]
 	
-				player.Character.HumanoidRootPart.CFrame = CFrame.new(drywall.Position)
-				game:GetService("ReplicatedStorage"):WaitForChild("DrywallClicked"):FireServer(unpack(args))
-				wait(0.01)
+				local player = game:GetService("Players").LocalPlayer
+	
+				if player and randomDrywall then
+					local args = {
+						[1] = randomDrywall.Position,
+						[2] = player.Character.HumanoidRootPart.Position
+					}
+	
+					player.Character.HumanoidRootPart.CFrame = CFrame.new(randomDrywall.Position)
+					game:GetService("ReplicatedStorage"):WaitForChild("DrywallClicked"):FireServer(unpack(args))
+					wait(0.01)
+				end
 			end
+			
+	
 		else
 			player.Character.HumanoidRootPart.CFrame = CFrame.new(player.Character.HumanoidRootPart.Position)
 		end
@@ -108,8 +117,8 @@ local function STGQXD_fake_script()
 	
 	button.MouseButton1Click:Connect(toggleScript)
 end
-coroutine.wrap(STGQXD_fake_script)()
-local function ZUGIQCI_fake_script()
+coroutine.wrap(RTPAG_fake_script)()
+local function NDYCKZ_fake_script()
 	local script = Instance.new('LocalScript', TextButton)
 
 	local function checkForSeats(parent)
@@ -123,4 +132,4 @@ local function ZUGIQCI_fake_script()
 	
 	checkForSeats(game:GetService("Workspace"))
 end
-coroutine.wrap(ZUGIQCI_fake_script)()
+coroutine.wrap(NDYCKZ_fake_script)()
